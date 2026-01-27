@@ -1,0 +1,29 @@
+services:
+  # The Nginx Sidecar (The entry point)
+  proxy:
+    build: .
+    ports:
+      - "8080:80"
+    depends_on:
+      - frontend
+      - backend
+
+  # Your Next.js App
+  frontend:
+    image: nextjs-app:latest
+    build:
+      context: ../nextjs-app
+      args:
+        - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+    expose:
+      - "3000"
+
+  # Your Backend API
+  backend:
+    image: django-app:latest
+    build:
+      context: ../django-app
+    expose:
+      - "8000"
+    env_file:
+      - .env
