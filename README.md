@@ -1,5 +1,13 @@
 # Next.js and Django App
 
+You can run the Next.js and Django applications individually or use Docker to run everything for you.
+
+[How to start Django app](#how-to-start-django-app)
+
+[How to start Next.js app](#how-to-start-nextjs-app)
+
+[How to run Docker containers](#how-to-run-docker-containers)
+
 ## How to start Django app
 
 This will allow you to start up the Django application by itself
