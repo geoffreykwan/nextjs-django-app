@@ -8,6 +8,8 @@ You can run the Next.js and Django applications individually or use Docker to ru
 
 [How to run Docker containers](#how-to-run-docker-containers)
 
+[How to run with Kubernetes](#how-to-run-with-kubernetes)
+
 ## How to start Django app
 
 This will allow you to start up the Django application by itself
@@ -37,9 +39,9 @@ pip install django djangorestframework django-cors-headers python-dotenv
 python3 manage.py runserver
 ```
 
-Note: The Django application will be accessible at [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+6. Access the Django API at [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 
-Note 2: If you need to start the server up again in the future, make sure to activate the virtual environment again if needed
+Note: If you need to start the server up again in the future, make sure to activate the virtual environment again if needed
 
 ## How to start Next.js app
 
@@ -60,9 +62,9 @@ npm install
 npm run dev
 ```
 
-Note: The Next.js application will be accessible at [http://localhost:3000](http://localhost:3000)
+4. Access the Next.js application at [http://localhost:3000](http://localhost:3000)
 
-Note 2: If you load the webpage and see the text "Hello World From Django" it means the website has successfully made a request to and received a response from the Django API server
+Note: If you load the webpage and see the text "Hello World From Django" it means the website has successfully made a request to the Django API server
 
 ## How to run Docker containers
 
@@ -85,4 +87,32 @@ NEXT_PUBLIC_API_URL=/api
 docker compose up --build
 ```
 
-Note: The application entrypoint will be accesible at [http://localhost:8080](http://localhost:8080/)
+4. Access the application at [http://localhost:8080](http://localhost:8080/)
+
+## How to run with Kubernetes
+
+This will run the containers in Kubernetes
+
+1. Start minikube. If you do not have minikube installed, you can use the instructions here [https://minikube.sigs.k8s.io/docs/start](https://minikube.sigs.k8s.io/docs/start)
+```
+minikube start
+```
+
+2. Go into the kubernetes-app folder
+```
+cd kubernetes-app
+```
+
+3. Create the Kubernetes resources that are specified in the yaml files
+```
+kubectl apply -f .
+```
+
+4. Create a tunnel so that you can access the web application from your browser
+```
+kubectl port-forward deployment/ingress-nginx-controller 8080:80 -n ingress-nginx
+```
+
+5. Access the web application at [http://localhost:8080](http://localhost:8080/)
+
+Note: If you load the webpage and see the text "Hello, Next.js!" and "Hello World From Django" it means everything is working properly
