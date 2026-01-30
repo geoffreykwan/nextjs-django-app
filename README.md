@@ -76,7 +76,7 @@ cd nginx-app
 2. Create a .env file inside the nginx-app folder that contains this text
 ```
 DJANGO_SECRET_KEY=django-insecure-abcd1234
-DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,backend
+DJANGO_ALLOWED_HOSTS=localhost
 NEXT_PUBLIC_API_URL=/api
 ```
 
